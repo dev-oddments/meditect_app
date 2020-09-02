@@ -1,0 +1,22 @@
+name: meditect
+description: meditect appliction
+publish_to: "meiday"
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  rflutter_alert: ^1.0.3
+  flutter_blue: ^0.7.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  e2e: ^0.2.1
+  flutter_driver:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
