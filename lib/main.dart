@@ -151,7 +151,7 @@ class DeviceScreen extends StatelessWidget {
 
   final BluetoothDevice device;
 
-  List<Widget> _buildServiceTiles(List<BluetoothService> services, context) {
+  List<Widget> _buildServiceTiles(List<BluetoothService> services) {
     return services
         .map(
           (s) => ServiceTile(
@@ -160,27 +160,6 @@ class DeviceScreen extends StatelessWidget {
                 .map(
                   (c) => CharacteristicTile(
                     characteristic: c,
-                    // onReadPressed: ()  async {
-                    //   await c.write([0x02, 0x53, 0x26, 0x44, 0x23, 0x03]);
-                    //   // await Alert(context: context, title: c.toString(), desc: "Flutter is awesome.").show();
-                    // },
-                    // onNotificationPressed: () async {
-                    //   await c.setNotifyValue(true);
-                    // },
-                    // descriptorTiles: c.descriptors
-                    //     .map(
-                    //       (d) => DescriptorTile(
-                    //         descriptor: d,
-                    //         onReadPressed: () async {
-                    //           // Alert(context: context, title: c.read(), desc: "Flutter is awesome.").show();
-                    //         },
-                    //         onWritePressed: () async {
-                    //           await c.write([0x02, 0x53, 0x26, 0x44, 0x23, 0x03]);
-                    //           await c.read();
-                    //         },
-                    //       ),
-                    //     )
-                    //     .toList(),
                   ),
                 )
                 .toList(),
@@ -267,24 +246,12 @@ class DeviceScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // StreamBuilder<int>(
-            //   stream: device.mtu,
-            //   initialData: 0,
-            //   builder: (c, snapshot) => ListTile(
-            //     title: Text('MTU Size'),
-            //     subtitle: Text('${snapshot.data} bytes'),
-            //     trailing: IconButton(
-            //       icon: Icon(Icons.edit),
-            //       onPressed: () => device.requestMtu(223),
-            //     ),
-            //   ),
-            // ),
             StreamBuilder<List<BluetoothService>>(
               stream: device.services,
               initialData: [],
               builder: (c, snapshot) {
                 return Column(
-                  children: _buildServiceTiles(snapshot.data, context),
+                  children: _buildServiceTiles(snapshot.data),
                 );
               },
             ),
